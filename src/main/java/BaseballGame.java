@@ -3,6 +3,8 @@ public class BaseballGame {
     final private BaseballController baseballController;
     final private BaseballScore baseballScore;
 
+    private boolean gameExited = false;
+
     public BaseballGame(BaseballView baseballView, BaseballController baseballController, BaseballScore baseballScore) {
         this.baseballView = baseballView;
         this.baseballController = baseballController;
@@ -12,9 +14,18 @@ public class BaseballGame {
     public void start() {
         baseballScore.resetNumbers();
 
-        while (true) {
+        while (!gameExited) {
             tick();
         }
+    }
+
+    private void handleExitOrRestart(boolean exit) {
+        if (exit) {
+            gameExited = true;
+            return;
+        }
+
+        baseballScore.resetNumbers();
     }
 
     private void tick() {
@@ -22,5 +33,14 @@ public class BaseballGame {
         int[] inputNumbers = baseballController.getInput();
         TurnResult result = baseballScore.calculateResult(inputNumbers);
         baseballView.printScore(result);
+
+        if (result.strike == 3) {
+            baseballView.printWin();
+            baseballView.printExitOrRestartMessage();
+
+            boolean exit = baseballController.getExitOrRestartInput();
+
+            handleExitOrRestart(exit);
+        }
     }
 }
