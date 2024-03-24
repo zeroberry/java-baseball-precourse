@@ -31,7 +31,7 @@ public class BaseballGame {
     private void tick() {
         baseballView.printTurnInputMessage();
         int[] inputNumbers = baseballController.getInput();
-        TurnResult result = baseballScore.calculateResult(inputNumbers);
+        TurnResult result = baseballScore.calculateResult(baseballScore.numbers, inputNumbers);
         baseballView.printScore(result);
 
         if (result.strike == 3) {

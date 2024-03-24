@@ -1,13 +1,13 @@
 import java.util.Random;
 
 public class BaseballScore {
-    private int[] numbers;
+    public int[] numbers;
 
     public void resetNumbers() {
         numbers = getRandomNumbers();
     }
 
-    public TurnResult calculateResult(int[] input) {
+    public TurnResult calculateResult(int[] numbers,int[] input) {
         int strike = 0;
         int ball = 0;
 
