@@ -12,15 +12,10 @@ public class BaseballController {
         while (true) {
             try {
                 String input = scanner.nextLine();
-
                 String[] splittedString = input.split("");
 
                 if (splittedString.length == 3) {
-                    return new int[]{
-                            Integer.parseInt(splittedString[0]),
-                            Integer.parseInt(splittedString[1]),
-                            Integer.parseInt(splittedString[2]),
-                    };
+                    return new int[]{Integer.parseInt(splittedString[0]), Integer.parseInt(splittedString[1]), Integer.parseInt(splittedString[2])};
                 }
 
                 baseballView.printInputErrorMessage();
@@ -34,7 +29,6 @@ public class BaseballController {
         while (true) {
             try {
                 String input = scanner.nextLine();
-
                 int num = Integer.parseInt(input);
 
                 if (num == 1) {
@@ -48,6 +42,5 @@ public class BaseballController {
                 baseballView.printInputErrorMessage();
             }
         }
-
     }
 }
