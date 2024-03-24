@@ -1,18 +1,16 @@
-import java.util.Random;
-
 public class BaseballGame {
     final private BaseballView baseballView;
     final private BaseballController baseballController;
+    final private BaseballScore baseballScore;
 
-    public BaseballGame(BaseballView baseballView, BaseballController baseballController) {
+    public BaseballGame(BaseballView baseballView, BaseballController baseballController, BaseballScore baseballScore) {
         this.baseballView = baseballView;
         this.baseballController = baseballController;
+        this.baseballScore = baseballScore;
     }
 
-    private int[] numbers;
-
     public void start() {
-        numbers = getRandomNumbers();
+        baseballScore.resetNumbers();
 
         while (true) {
             tick();
@@ -22,15 +20,7 @@ public class BaseballGame {
     private void tick() {
         baseballView.printTurnInputMessage();
         int[] inputNumbers = baseballController.getInput();
-    }
-
-    private int[] getRandomNumbers() {
-        Random rand = new Random();
-
-        return new int[]{
-                rand.nextInt(10),
-                rand.nextInt(10),
-                rand.nextInt(10)
-        };
+        TurnResult result = baseballScore.calculateResult(inputNumbers);
+        baseballView.printScore(result);
     }
 }
